@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_download"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/aliceblue"
+        android:gravity="center"
+        android:text="开始" />
+
+    <TextView
+        android:id="@+id/tv_download_result"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tv_flowable"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/aliceblue"
+        android:gravity="center"
+        android:text="tv_flowable" />
+
+    <TextView
+        android:id="@+id/result2"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="result2" />
+</LinearLayout>

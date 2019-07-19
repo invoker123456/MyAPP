@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyAPP</string>
+    <string name="switchcamera">摄像头</string>
+</resources>

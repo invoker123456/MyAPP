@@ -1,0 +1,139 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+// 添加插件
+apply plugin: 'com.mob.sdk'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        applicationId "com.invoker.myapp"
+        minSdkVersion 26
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0.3"
+        testInstrumentationRunner "android.support.TestActivityMy.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        releaseSigning {
+            storeFile file('invoker.jks');
+            storePassword('901225');
+            keyAlias 'invoker';
+            keyPassword '901225';
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+greendao {
+    schemaVersion 1 //数据库版本号
+    daoPackage 'com.invoker.myapp.db'// 设置DaoMaster、DaoSession、Dao 包名
+    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+}
+
+// 在MobSDK的扩展中注册SMSSDK的相关信息
+MobSDK {
+    appKey "2b2d94869db0e"
+    appSecret "c4ae1e5abc1de3d0154db0f7dd032cb5"
+
+    SMSSDK {
+        //默认使用GUI，若不使用GUI，通过以下开关关闭
+        //gui false
+        //若使用GUI的自动填充验证码功能，需打开此设置
+        autoSMS true
+    }
+
+    // 分享
+    ShareSDK {
+        //平台配置信息
+        devInfo {
+            // 微信 昌吉青年 (这里 要是换了app包 需要改)
+            Wechat {
+                appId "wx8c62dfbf8d33b2e7"
+                appSecret "1585688c5ffa2f0d9b50e7f73555af23"
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27+'
+    implementation 'com.android.support:animated-vector-drawable:27+'
+    implementation 'com.android.support:support-vector-drawable:27+'
+    implementation 'com.android.support:support-v13:27+'
+    implementation 'com.android.support:cardview-v7:27+'
+    implementation 'com.android.support:design:27+'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:recyclerview-v7:27+'
+    // 引用自己的库
+    implementation project(':mylibrary')
+    /*rx-android-java*/
+    implementation 'com.trello:rxlifecycle:1.0'
+    implementation 'com.trello:rxlifecycle-components:1.0'
+    // okhttp3
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    // butterknife 8.4.0 需要 annotationProcessor
+    implementation 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    // 万能的Adapter ForListView
+    implementation 'com.zhy:base-adapter:3.0.3'
+    // 万能的Adapter ForRecyclerView
+    implementation 'com.zhy:base-rvadapter:3.0.3'
+    // 图片加载 picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    // RxJava2 + Retrofit2
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+
+    // GreenDao
+    implementation 'org.greenrobot:greendao:3.2.2'
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+
+    // loading animations
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+    testImplementation 'junit:junit:4.12'
+    //低版本动画支持
+    implementation 'com.nineoldandroids:library:2.4.0'
+    //加载动画
+    implementation 'com.zyao89:zloading:1.2.0'
+
+    // 第三方权限管理库
+    implementation 'com.github.hotchemi:permissionsdispatcher:2.2.0'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.2.0'
+    // PhotoView 图片缩放
+    implementation 'com.github.chrisbanes:PhotoView:2.1.2'
+    // 饺子 视频播放器  https://github.com/lipangit/JiaoZiVideoPlayer
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
+}
